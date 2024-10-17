@@ -1,0 +1,6 @@
+global:
+  postgresql:
+    auth:
+      username: yourusername
+      password: yourpassword
+      database: traindb

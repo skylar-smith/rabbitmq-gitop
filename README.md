@@ -3,9 +3,13 @@
 
 ## Minikube setup
 ```bash
-minikube start --cpus=4 --memory=8192 --disk-size=50g
-minikube addons enable ingress
-minikube addons enable metrics-server
+./minikube-setup.sh
+```
+
+## ArgoCD
+```bash
+cd argocd-minikube
+./setup.sh
 ```
 
 ## Infrastructure
@@ -31,6 +35,20 @@ helm install trains-postgres bitnami/postgresql \
   --set global.postgresql.auth.database=traindb
 ```
 
+## Neo4j
+Add Neo4j Helm Repo
+```bash
+helm repo add neo4j https://helm.neo4j.com/neo4j
+helm repo update
+```
+
+helm install
+```
+helm install train-neo4j neo4j/neo4j \
+  --namespace infrastructure \
+  --set neo4jPassword=yourpassword \
+  --set acceptLicenseAgreement=yes
+```
 
 ## Ingress setup
 get the minikube ip
@@ -43,3 +61,9 @@ update `/etc/hosts`
 <MINIKUBE_IP>  postgres.local
 <MINIKUBE_IP>  rabbitmq.local
 ```
+
+
+
+# Data
+
+(data.gov Class 1 rail roads)[https://geodata.bts.gov/datasets/usdot::north-american-rail-network-lines-class-i-freight-railroads-view/about]
