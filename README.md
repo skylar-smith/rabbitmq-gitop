@@ -11,6 +11,18 @@
 cd argocd-minikube
 ./setup.sh
 ```
+get argo pw for cli
+```bash
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode; echo
+```
+
+Cert setup
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=argocd.local/O=argocd.local"
+kubectl create secret tls argocd-tls --key tls.key --cert tls.crt -n argocd
+k apply -f argocd-minikube/argocd-config.yaml
+k scale  deployment/argocd-server --replicas=0 && k scale deployment/argocd-server --replicas=1
+```
 
 ## Infrastructure
 

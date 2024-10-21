@@ -4,7 +4,7 @@
 MINIKUBE_IP=$(minikube ip)
 
 # Define hostnames to map
-HOSTNAMES=("argocd.local" "postgres.local" "rabbitmq.local" "neo4j.local" "argocd.local")
+HOSTNAMES=("postgres.local" "rabbitmq.local" "neo4j.local" "argocd.local")
 
 # Output the /etc/hosts entries
 echo "Add the following entries to your /etc/hosts file:"
